@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>configurable-serialize jQuery plugin</title>
+    <meta charset="UTF-8"/>
+    <script type="text/javascript" src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="jquery.configurable-serialize.js"></script>
+    <script type="text/javascript">
+      function refresh(){
+        $('#standard'       ).html($('form').serialize());
+        $('#emptyValues'    ).html($('form').serialize({emptyValues:false}));
+        $('#emptyCheckboxes').html($('form').serialize({emptyCheckboxes:true}));
+        $('#both'           ).html($('form').serialize({emptyValues:false, emptyCheckboxes:true}));
+      }
+      $(document).ready(function (){
+        $('input').blur(refresh);
+        $('select').change(refresh);
+        $('input').change(refresh);
+        $('form').change(refresh);
+        refresh();
+      })
+    </script>
+    <style>
+      #results th, #results td { padding-left: 0.5em; padding-right: 0.5em; }
+      #results td { font-family: monospace; line-height: 1.5em; }
+    </style>
+    <link rel="stylesheet" href="http://glyphobet.net/css/reset.css"  type="text/css" media="all"             />
+    <link rel="stylesheet" href="http://glyphobet.net/css/style.css"  type="text/css" media="all"             />
+    <link rel="stylesheet" href="http://glyphobet.net/css/screen.css" type="text/css" media="screen"          />
+    <link rel="stylesheet" href="http://glyphobet.net/css/print.css"  type="text/css" media="print, handheld" />
+  </head>
+  <body id="body">
+    <center>
+      <h1>jQuery configurable-serialize Plugin</h1>
+      <span>by Matt Chisholm &lt;matt (dash) jquery (at) theory (dot) org&gt; &amp; Seth Harris</span>
+    </center>
+
+    <ul>
+      <li>Download <a href="jquery.configurable-serialize.js">jquery.configurable-serialize.js</a> v 0.1, 1 Nov 2009</li>
+    </ul>
+
+    <p>Visit this plugin's <a href="http://plugins.jquery.com/project/configurable-serialize">page on plugins.jquery.com</a>.</p>
+
+    <a name="docs"><h3>What does it do?</h3></a>
+
+    <p>This jQuery plugin adds configuration options to jQuery's standard <a href="http://docs.jquery.com/Ajax/serialize"><code>serialize()</code> function</a>. Its default behavior is identical to <a href="http://docs.jquery.com/Ajax/serialize">the built-in <code>serialize()</code> function</a>, but it offers two configuration options, <code>emptyValues</code> and <code>emptyCheckboxes</code>.</p>
+    
+    <p><code>emptyValues</code> defaults to <code>true</code>. When set to <code>false</code>, it causes serialize to omit form elements with no value. This is useful when you have a form with many optional fields and want to keep the form submission small.</p> 
+
+    <p><code>emptyCheckboxes</code> defaults to <code>false</code>. When set to <code>true</code>, it causes serialize to include un-checked checkboxes in the serialized form parameters, with no value. This is useful when you want to explicitly tell your server backend to blank checkbox values.</p>
+
+    <a name="demo"><h2>Demo</h2></a>
+    
+    <p>Modify the form widgets and see the results of configurable-serialize's <code>serialize()</code> function below:</p>
+    
+    <form id="form">
+      <input type="hidden" name="hidden"/>
+      <input type="checkbox" name="checkbox" value="checkbox" id="checkbox"/><label for="checkbox">checkbox</label><br/>
+      <input type="radio" name="radio" value="radio1" id="radio1"/><label for="radio1">radio1</label>
+      <input type="radio" name="radio" value="radio2" id="radio2"/><label for="radio2">radio2</label><br/>
+      <input type="text" name="text"/><br/>
+      <select name="multiple" multiple>
+        <option value="purple">purple</option>
+        <option value="orange">orange</option>
+        <option value="">empty option</option>
+      </select><br/>
+      <select name="select" multiple>
+        <option value="banana">banana</option>
+        <option value="orange">orange</option>
+        <option value="">empty option</option>
+      </select><br/>
+      <button type="reset">Reset</button>
+    </form>
+
+    <h3>Results</h3>
+
+    <table id="results">
+      <tr>
+        <th>emptyValues</th>
+        <th>emptyCheckboxes</th>
+        <th>Result</th>
+      </tr>
+      <tr>
+        <td>True</td>
+        <td>False</td>
+        <td id="standard"></td>
+      </tr>
+      <tr>
+        <td>False</td>
+        <td>False</td>
+        <td id="emptyValues"></td>
+      </tr>
+      <tr>
+        <td>True</td>
+        <td>True</td>
+        <td id="emptyCheckboxes"></td>
+      </tr>
+      <tr>
+        <td>False</td>
+        <td>True</td>
+        <td id="both"></td>
+      </tr>
+    </table>
+  </body>
+</html>
