@@ -28,8 +28,8 @@
           jQuery.map( val, function(val, i){
             return vcheck(elem.name, val);
           }) :
-            (options.emptyCheckboxes && this.type == 'checkbox' && !this.checked) ? 
-              vcheck(elem.name, '') : 
+            (options.emptyCheckboxes && this.type == 'checkbox' && !this.checked) ?
+              vcheck(elem.name, '') :
               vcheck(elem.name, val);
     }).get();
   };
