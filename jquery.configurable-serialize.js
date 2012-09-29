@@ -17,13 +17,13 @@
     })
     .filter(function(){
       return this.name && !this.disabled &&
-        ((this.checked || (options.emptyCheckboxes && options.emptyValues && this.type == 'checkbox') ) ||
-          /select|textarea/i.test(this.nodeName) ||
-          /text|hidden|password|search/i.test(this.type));
+        ((this.checked || (options.emptyCheckboxes && options.emptyValues && this.type == 'checkbox')) ||
+         (/select|textarea/i.test(this.nodeName)) ||
+         (/text|hidden|password|search/i.test(this.type)));
     })
     .map(function(i, elem){
       var val = jQuery(this).val();
-      return val == null ? null :
+      return val === null ? null :
         jQuery.isArray(val) ?
           jQuery.map( val, function(val, i){
             return vcheck(elem.name, val);
